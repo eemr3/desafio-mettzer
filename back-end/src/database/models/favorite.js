@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: 'favorites',
+      timestamps: false,
       underscored: true,
     },
   );
@@ -19,12 +20,17 @@ module.exports = (sequelize, DataTypes) => {
   Favorite.associate = (models) => {
     Favorite.hasMany(models.Author, {
       as: 'authors',
-      foreignKey: 'authorId',
+      foreignKey: 'favoriteId',
     });
 
     Favorite.hasMany(models.Type, {
       as: 'types',
-      foreignKey: 'typeId',
+      foreignKey: 'favoriteId',
+    });
+
+    Favorite.hasMany(models.Url, {
+      as: 'urls',
+      foreignKey: 'favoriteId',
     });
 
     Favorite.belongsTo(models.User, {

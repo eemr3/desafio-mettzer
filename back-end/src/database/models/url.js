@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Url = sequelize.define(
     'Url',
     {
-      type: DataTypes.STRING,
+      url: DataTypes.STRING,
       favoriteId: {
         type: DataTypes.INTEGER,
         foreignKey: true,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       underscored: true,
       timestamps: false,
-      tableName: 'types',
+      tableName: 'urls',
     },
   );
 
