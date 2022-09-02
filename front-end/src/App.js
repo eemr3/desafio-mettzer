@@ -1,7 +1,11 @@
 import AppRoutes from './routes/routes';
 
 function App() {
-  return <AppRoutes />;
+  return (
+    <div className="h-screen">
+      <AppRoutes />
+    </div>
+  );
 }
 
 export default App;
