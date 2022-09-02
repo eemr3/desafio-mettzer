@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (_req, res) => res.send('Hello World!'));
+app.get('/', (_req, res) => res.send('Olá estamos ON!!!'));
 
 app.use('/users', Router.UserRouter);
 app.use('/login', Router.SignInRouter);
