@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const readFileKey = require('../utils/readFileKey');
 
-const genereteToken = (data) => {
-  const SECRETE_KEY = readFileKey();
+const generateToken = async (data) => {
+  const SECRETE_KEY = await readFileKey();
   const CONFIG = {
     algorithm: 'HS256',
     expiresIn: '1h',
@@ -13,8 +13,8 @@ const genereteToken = (data) => {
   return token;
 };
 
-const decodedToken = (token) => {
-  const SECRETE_KEY = readFileKey();
+const decodedToken = async (token) => {
+  const SECRETE_KEY = await readFileKey();
   try {
     const decoded = jwt.verify(token, SECRETE_KEY);
 
@@ -25,6 +25,6 @@ const decodedToken = (token) => {
 };
 
 module.exports = {
-  genereteToken,
+  generateToken,
   decodedToken,
 };
