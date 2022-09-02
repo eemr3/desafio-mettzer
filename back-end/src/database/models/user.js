@@ -12,5 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'users',
     },
   );
+
+  User.associate = (models) => {
+    User.hasMany(models.Favorite, {
+      as: 'favorites',
+      foreignKey: 'userId',
+    });
+  };
+
   return User;
 };
