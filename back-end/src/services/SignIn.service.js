@@ -14,7 +14,11 @@ const signIn = async (userEmail, password) => {
   if (!pwdIsValid) {
     throw errorBase(403, 'Email ou senha inválidos!');
   }
-  const token = await generateToken({ name: isSignIn.name, email: isSignIn.email });
+  const token = await generateToken({
+    id: isSignIn.id,
+    name: isSignIn.name,
+    email: isSignIn.email,
+  });
 
   return { token };
 };
