@@ -30,6 +30,7 @@ const createFavorite = async (data) => {
     title: favorite.title,
     description: favorite.description,
     urls: resultUrls,
+    idArticle: favorite.idArticle,
   };
 };
 
