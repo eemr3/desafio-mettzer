@@ -8,14 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      id_Article: {
+        type: Sequelize.INTEGER,
+      },
       title: {
+        type: Sequelize.TEXT,
+      },
+      type: {
         type: Sequelize.STRING,
       },
       type: {
         type: Sequelize.STRING,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       user_id: {
         allowNull: false,

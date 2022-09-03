@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const Favorite = sequelize.define(
     'Favorite',
     {
+      idArticle: DataTypes.INTEGER,
       title: DataTypes.STRING,
+      type: DataTypes.STRING,
       description: DataTypes.STRING,
       type: DataTypes.STRING,
       userId: {
