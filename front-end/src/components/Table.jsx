@@ -71,7 +71,7 @@ function Table() {
                         ))}
                       </td>
                       <td className="flex justify-center text-center max-w-md  py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                        <ButtonFavorite />
+                        <ButtonFavorite favData={item._source.id} />
                       </td>
                     </tr>
                   ))

@@ -14,10 +14,11 @@ function HomeProvider({ children }) {
 
   useEffect(() => {
     const allListArticle = async () => {
-      const result = await getListArticle(query, offset, KEY);
+      const result = await getListArticle(query, offset);
 
       setArticles(result);
     };
+
     allListArticle();
   }, [offset, query]);
 
