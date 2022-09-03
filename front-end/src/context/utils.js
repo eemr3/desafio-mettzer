@@ -9,9 +9,8 @@ export const requestSignIn = async (values) => {
 
 export const getListArticle = async (query, page, key) => {
   const response = await ExternalApi.get(
-    `/search/${query}?page=${page}&pageSize=10&apiKey=${key}`,
+    `/search/${query}?page=${page === 0 ? 1 : page}&pageSize=10&apiKey=${key}`,
   );
-  console.log(response);
 
   return response.data.data;
 };

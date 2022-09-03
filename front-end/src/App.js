@@ -3,7 +3,7 @@ import AppRoutes from './routes/routes';
 
 function App() {
   return (
-    <div className="h-screen">
+    <div className="h-screen flex flex-col">
       <AuthProvider>
         <AppRoutes />
       </AuthProvider>

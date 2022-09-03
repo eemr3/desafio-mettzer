@@ -10,7 +10,7 @@ function HomeProvider({ children }) {
   const [articles, setArticles] = useState([]);
   const [query, setQuery] = useState('Água');
   const [inputChange, setInputChange] = useState('');
-  const [offset, setOffset] = useState(1);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const allListArticle = async () => {
