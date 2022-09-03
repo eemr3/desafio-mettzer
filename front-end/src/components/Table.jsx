@@ -42,29 +42,27 @@ function Table() {
                     </td>
                   </tr>
                 ) : (
-                  articles.map((art, index) => (
-                    <tr key={art.id}>
+                  articles.map((item) => (
+                    <tr key={item._source.id}>
                       <td className="max-w-xs text-center truncate text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                        {art.authors.slice(0, 2).map((aut) => (
-                          <span key={`${art.id}-${aut}`}>{aut}</span>
+                        {item._source.authors.slice(0, 2).map((aut, ind) => (
+                          <span key={`${item.id}-${aut}__${ind}`}>{aut}</span>
                         ))}
                       </td>
                       <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                        {art.types.map((typ) => (
-                          <span key={`${art.id}-${typ}`}>{typ}</span>
-                        ))}
+                        {item._type}
                       </td>
                       <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                        {art.title}
+                        {item._source.title}
                       </td>
                       <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                        {art.description}
+                        {item._source.description}
                       </td>
                       <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                        {art.fulltextUrls.slice(0, 2).map((url, ind) => (
+                        {item._source.urls.slice(0, 2).map((url, ind) => (
                           <a
                             className="mr-2"
-                            key={`${url}-${art.id}`}
+                            key={`${url}-${item.id}`}
                             href={url}
                             target="_blank"
                             rel="noreferrer">
