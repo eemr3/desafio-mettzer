@@ -1,11 +1,12 @@
 const Service = require('../services/Favorite.service');
 
 const createFavorite = async (req, res) => {
-  const { authors, types, title, description, urls } = req.body;
+  const { authors, idArticle, type, title, description, urls } = req.body;
   const { id } = req.data;
   const favorite = await Service.createFavorite({
     authors,
-    types,
+    idArticle,
+    type,
     title,
     description,
     urls,
