@@ -8,7 +8,7 @@ function Table() {
 
   return (
     <div>
-      <div className="lg:w-5/6 m-auto">
+      <div className="lg:w-11/12 m-auto">
         <div className="w-full">
           <div className="lg:max-w-full m-0 overflow-x-auto">
             <table className="m-0 table-auto w-full">
@@ -17,7 +17,7 @@ function Table() {
                   <th className="w-1/6 min-w-[160px] text-lg font-semibold text-white py-3 lg:py-4 px-3 lg:px-4 border-l border-transparent">
                     Autor
                   </th>
-                  <th className="w-1/6 min-w-[160px] text-lg font-semibold text-white py-3 lg:py-4 px-3 lg:px-4 border-l border-transparent">
+                  <th className="w-1/12 min-w-[160px] text-lg font-semibold text-white py-3 lg:py-4 px-3 lg:px-4 border-l border-transparent">
                     Tipo
                   </th>
                   <th className="w-1/6 min-w-[160px] text-lg font-semibold text-white py-3 lg:py-4 px-3 lg:px-4 border-l border-transparent">
