@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
+      type: DataTypes.STRING,
       userId: {
         type: DataTypes.INTEGER,
         foreignKey: true,
@@ -20,11 +21,6 @@ module.exports = (sequelize, DataTypes) => {
   Favorite.associate = (models) => {
     Favorite.hasMany(models.Author, {
       as: 'authors',
-      foreignKey: 'favoriteId',
-    });
-
-    Favorite.hasMany(models.Type, {
-      as: 'types',
       foreignKey: 'favoriteId',
     });
 
