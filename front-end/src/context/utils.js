@@ -2,6 +2,8 @@ import Cookies from 'js-cookie';
 import { api } from '../api/api';
 import { ExternalApi } from '../api/externalApi';
 
+const token = Cookies.get('token');
+
 export const requestSignIn = async (values) => {
   const response = await api.post('/login', values);
 
@@ -18,10 +20,29 @@ export const getListArticle = async (query, page) => {
 };
 
 export const requestSaveFavorite = async (data) => {
-  const token = Cookies.get('token');
   await api.post('/favorites', data, {
     headers: {
       authorization: token,
     },
   });
+};
+
+export const requestGetAllFavorites = async () => {
+  const response = await api.get('/favorites', {
+    headers: {
+      authorization: token,
+    },
+  });
+
+  return response;
+};
+
+export const requestDeleteFavorite = async (id) => {
+  const response = await api.get(`/favorites/${id}`, {
+    headers: {
+      authorization: token,
+    },
+  });
+
+  return response;
 };
