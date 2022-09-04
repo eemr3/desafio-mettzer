@@ -1,0 +1,21 @@
+{
+  "name": "mettzer",
+  "version": "1.0.0",
+  "description": "Aplicação pra controlar tarefas do dia, onde podera adicionar, editar e remover as tarefas.",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "(cd back-end && npm install); (cd front-end && npm install)",
+    "install:apps": "(cd back-end && npm install); (cd front-end && npm install)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eemr3/desafio-mettzer.git"
+  },
+  "keywords": [],
+  "author": "Emerson Moreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eemr3/desafio-mettzer/issues"
+  },
+  "homepage": "https://github.com/eemr3/desafio-mettzer#readme"
+}
