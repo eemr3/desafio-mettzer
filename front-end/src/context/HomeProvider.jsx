@@ -2,25 +2,55 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { AppContext } from './AppContext';
+import { requestGetAllFavorites } from './utils';
 import { getListArticle } from './utils';
-
-const KEY = process.env.REACT_APP_APIKEY_CORE;
 
 function HomeProvider({ children }) {
   const [articles, setArticles] = useState([]);
   const [query, setQuery] = useState('Água');
   const [inputChange, setInputChange] = useState('');
-  const [offset, setOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [favorites, setFavorites] = useState([]);
+  const [favorited, setFavorited] = useState(false);
+  const [totalPagesFavorites, setTotalPagesFavorites] = useState(0);
+
+  useEffect(() => {
+    const getFavorites = async () => {
+      try {
+        const response = await requestGetAllFavorites(currentPage);
+        setTotalPagesFavorites(response.length);
+        const dataFavorites = response.map((item) => ({
+          authors: item.authors.map((a) => a.authors),
+          _type: item._type,
+          title: item.title,
+          description: item.description,
+          idFav: item.id,
+          urls: item.urls.map((u) => u.url),
+          id: item.idArticle,
+        }));
+
+        setFavorites(dataFavorites);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getFavorites();
+  }, [favorited, currentPage]);
 
   useEffect(() => {
     const allListArticle = async () => {
-      const result = await getListArticle(query, offset);
+      try {
+        const result = await getListArticle(query, currentPage);
 
-      setArticles(result);
+        setArticles(result.map((item) => ({ _type: item._type, ...item._source })));
+      } catch (error) {
+        console.info(error);
+      }
     };
 
     allListArticle();
-  }, [offset, query]);
+  }, [currentPage, query]);
 
   return (
     <AppContext.Provider
@@ -29,8 +59,13 @@ function HomeProvider({ children }) {
         setQuery,
         setInputChange,
         inputChange,
-        offset,
-        setOffset,
+        currentPage,
+        setCurrentPage,
+        setArticles,
+        favorites,
+        favorited,
+        setFavorited,
+        totalPagesFavorites,
       }}>
       {children}
     </AppContext.Provider>
