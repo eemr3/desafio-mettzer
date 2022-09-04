@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Cookie from 'js-cookie';
 import { AppContext } from './AppContext';
 import { requestSignIn } from './utils';
@@ -7,10 +7,12 @@ import { useHistory } from 'react-router-dom';
 
 function AuthProvider({ children }) {
   const history = useHistory();
+  const [token, setToken] = useState('');
   const signIn = async (values) => {
     try {
       const response = await requestSignIn(values);
       Cookie.set('token', response.token);
+      setToken(response.token);
       history.push('/home');
     } catch (err) {
       console.log(err);
@@ -28,7 +30,7 @@ function AuthProvider({ children }) {
     }
   };
 
-  return <AppContext.Provider value={{ signIn }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ signIn, token }}>{children}</AppContext.Provider>;
 }
 
 export default AuthProvider;
