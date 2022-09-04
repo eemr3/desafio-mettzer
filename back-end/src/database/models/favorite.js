@@ -5,9 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       idArticle: DataTypes.INTEGER,
       title: DataTypes.STRING,
-      type: DataTypes.STRING,
+      _type: {
+        type: DataTypes.STRING,
+        field: '_type',
+      },
       description: DataTypes.STRING,
-      type: DataTypes.STRING,
       userId: {
         type: DataTypes.INTEGER,
         foreignKey: true,

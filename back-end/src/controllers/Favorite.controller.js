@@ -1,14 +1,14 @@
 const Service = require('../services/Favorite.service');
 
 const createFavorite = async (req, res) => {
-  const { authors, idArticle, type, title, description, urls } = req.body;
+  const { authors, idArticle, _type, title, description, urls } = req.body;
   const { id } = req.data;
 
   const favorite = await Service.createFavorite({
     authors,
     idArticle,
     authors,
-    type,
+    _type,
     title,
     description,
     urls,
@@ -18,8 +18,9 @@ const createFavorite = async (req, res) => {
   return res.status(201).json(favorite);
 };
 
-const getAllFavorites = async (_req, res) => {
-  const favorites = await Service.getAllFavorites();
+const getAllFavorites = async (req, res) => {
+  const { page } = req.query;
+  const favorites = await Service.getAllFavorites(Number(page));
 
   return res.status(200).json(favorites);
 };
