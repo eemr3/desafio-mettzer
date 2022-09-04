@@ -7,7 +7,10 @@ const signIn = async (req, res) => {
 
     return res.status(200).json(token);
   } catch (error) {
-    console.info(error);
+    if (!error.status) {
+      return res.status(500).json({ error: 'internal server error!' });
+    }
+
     return res.status(error.status).json({ message: error.message });
   }
 };

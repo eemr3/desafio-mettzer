@@ -3,19 +3,22 @@ const Service = require('../services/Favorite.service');
 const createFavorite = async (req, res) => {
   const { authors, idArticle, _type, title, description, urls } = req.body;
   const { id } = req.data;
+  try {
+    const favorite = await Service.createFavorite({
+      authors,
+      idArticle,
+      authors,
+      _type,
+      title,
+      description,
+      urls,
+      id,
+    });
 
-  const favorite = await Service.createFavorite({
-    authors,
-    idArticle,
-    authors,
-    _type,
-    title,
-    description,
-    urls,
-    id,
-  });
-
-  return res.status(201).json(favorite);
+    return res.status(201).json(favorite);
+  } catch (error) {
+    return res.status(500).json({ error: 'internal server error' });
+  }
 };
 
 const getAllFavorites = async (req, res) => {
