@@ -2,14 +2,14 @@ const { Favorite, Author, Url } = require('../database/models');
 const errorBase = require('../utils/errorBase');
 
 const createFavorite = async (data) => {
-  const { authors, type, title, description, urls, id, idArticle } = data;
-
+  const { authors, _type, title, description, urls, id, idArticle } = data;
+  console.log(_type);
   const favorite = await Favorite.create({
     title,
     description,
     userId: id,
     idArticle,
-    type,
+    _type,
   });
 
   const resultAuthors = await Promise.all(
@@ -26,7 +26,7 @@ const createFavorite = async (data) => {
 
   return {
     authors: resultAuthors,
-    type: favorite.type,
+    _type: favorite._type,
     title: favorite.title,
     description: favorite.description,
     urls: resultUrls,
@@ -34,10 +34,14 @@ const createFavorite = async (data) => {
   };
 };
 
-const getAllFavorites = async () => {
+const getAllFavorites = async (page) => {
+  const offset = (page - 1) * 10;
+  const limit = 10;
   const favorites = await Favorite.findAll({
+    offset,
+    limit,
     include: [
-      { model: Author, as: 'authors' },
+      { model: Author, as: 'authors', attributes: { exclude: ['id', 'favoriteId'] } },
       { model: Url, as: 'urls' },
     ],
   });

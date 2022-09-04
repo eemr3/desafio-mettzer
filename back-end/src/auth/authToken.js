@@ -5,7 +5,7 @@ const generateToken = async (data) => {
   const SECRETE_KEY = await readFileKey();
   const CONFIG = {
     algorithm: 'HS256',
-    expiresIn: '1h',
+    expiresIn: '1d',
   };
 
   const token = jwt.sign(data, SECRETE_KEY, CONFIG);
