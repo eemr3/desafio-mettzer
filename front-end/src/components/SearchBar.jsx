@@ -1,15 +1,21 @@
 import { Fragment, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { AppContext } from '../context/AppContext';
-import { Link } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function SearchBar() {
+export default function SearchBar({ isRender }) {
+  const history = useHistory();
   const { setQuery, inputChange, setInputChange } = useContext(AppContext);
+  const signOut = () => {
+    Cookies.remove('token');
+    history.push('/login');
+  };
 
   const handleSearch = () => {
     setQuery(inputChange);
@@ -35,19 +41,27 @@ export default function SearchBar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    <input
-                      className="p-1 mr-1 rounded"
-                      type="text"
-                      name="search"
-                      value={inputChange}
-                      onChange={(e) => setInputChange(e.target.value)}
-                    />
-                    <button
-                      className="lg:ml-4 p-1 w-28 rounded bg-slate-100 text-zinc-900"
-                      type="button"
-                      onClick={handleSearch}>
-                      Buscar
-                    </button>
+                    {isRender ? (
+                      <>
+                        <input
+                          className="p-1 mr-1 rounded"
+                          type="text"
+                          name="search"
+                          value={inputChange}
+                          onChange={(e) => setInputChange(e.target.value)}
+                        />
+                        <button
+                          className="lg:ml-4 p-1 w-28 rounded bg-slate-100 text-zinc-900"
+                          type="button"
+                          onClick={handleSearch}>
+                          Buscar
+                        </button>
+                      </>
+                    ) : (
+                      <Link to="/home" className="text-white">
+                        Home
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -87,7 +101,7 @@ export default function SearchBar() {
                       <Menu.Item>
                         {({ active }) => (
                           <span
-                            onClick={() => {}}
+                            onClick={signOut}
                             className={classNames(
                               active ? 'bg-gray-100' : '',
                               'block px-4 py-2 text-sm text-gray-700 cursor-pointer',
@@ -105,19 +119,27 @@ export default function SearchBar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              <input
-                className="p-1 mr-1 rounded"
-                type="text"
-                name="search"
-                value={inputChange}
-                onChange={(e) => setInputChange(e.target.value)}
-              />
-              <button
-                className="lg:ml-4 p-1 w-28 rounded bg-slate-100 text-zinc-900"
-                type="button"
-                onClick={handleSearch}>
-                Buscar
-              </button>
+              {isRender ? (
+                <>
+                  <input
+                    className="p-1 mr-1 rounded"
+                    type="text"
+                    name="search"
+                    value={inputChange}
+                    onChange={(e) => setInputChange(e.target.value)}
+                  />
+                  <button
+                    className="lg:ml-4 p-1 w-28 rounded bg-slate-100 text-zinc-900"
+                    type="button"
+                    onClick={handleSearch}>
+                    Buscar
+                  </button>
+                </>
+              ) : (
+                <Link to="/home" className="text-white">
+                  Home
+                </Link>
+              )}
             </div>
           </Disclosure.Panel>
         </>
