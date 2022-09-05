@@ -1,12 +1,28 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
 import Table from '../components/Table';
 import { AppContext } from '../context/AppContext';
+import { getListArticle } from '../context/utils';
 
 const PageSize = 10;
 function Home() {
-  const { currentPage, setCurrentPage, articles, favorites } = useContext(AppContext);
+  const { currentPage, setCurrentPage, articles, favorites, query, setArticles } =
+    useContext(AppContext);
+
+  useEffect(() => {
+    const allListArticle = async () => {
+      try {
+        const result = await getListArticle(query, currentPage);
+
+        setArticles(result.map((item) => ({ _type: item._type, ...item._source })));
+      } catch (error) {
+        console.info(error);
+      }
+    };
+
+    allListArticle();
+  }, [currentPage, query, setArticles]);
 
   return (
     <>

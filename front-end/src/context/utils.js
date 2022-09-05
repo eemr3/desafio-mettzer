@@ -28,7 +28,7 @@ export const requestSaveFavorite = async (data) => {
 
 export const requestGetAllFavorites = async (page) => {
   const token = Cookies.get('token');
-  const favoriteData = await api.get(`/favorites?page=${page}`, {
+  const favoriteData = await api.get(`/favorites?page=${page}&limit=10`, {
     headers: {
       authorization: token,
     },

@@ -1,14 +1,36 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
 import Table from '../components/Table';
 import { AppContext } from '../context/AppContext';
-// import { requestGetAllFavorites } from '../context/utils';
+import { requestGetAllFavorites } from '../context/utils';
 
 const PageSize = 10;
 function Favorites() {
-  const { currentPage, setCurrentPage, favorites } = useContext(AppContext);
+  const {
+    favorited,
+    currentPage,
+    setCurrentPage,
+    favorites,
+    setTotalPagesFavorites,
+    setFavorites,
+  } = useContext(AppContext);
   const LIMIT = favorites.length + 10;
+
+  useEffect(() => {
+    const getFavorites = async () => {
+      try {
+        const response = await requestGetAllFavorites(currentPage);
+        setTotalPagesFavorites(response.length);
+        console.info(response);
+        setFavorites(response);
+      } catch (error) {
+        console.info(error);
+      }
+    };
+
+    getFavorites();
+  }, [favorited, currentPage, setTotalPagesFavorites, setFavorites]);
 
   return (
     <>

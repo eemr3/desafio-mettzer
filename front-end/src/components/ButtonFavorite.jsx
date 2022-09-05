@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 import { AppContext } from '../context/AppContext';
 import { requestDeleteFavorite, requestSaveFavorite } from '../context/utils';
