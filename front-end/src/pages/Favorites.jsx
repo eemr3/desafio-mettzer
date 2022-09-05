@@ -8,10 +8,7 @@ import { AppContext } from '../context/AppContext';
 const PageSize = 10;
 function Favorites() {
   const { currentPage, setCurrentPage, favorites } = useContext(AppContext);
-
   const LIMIT = favorites.length + 10;
-
-  console.log(favorites.length);
 
   return (
     <>
