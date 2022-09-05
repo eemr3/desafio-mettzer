@@ -5,7 +5,7 @@ import { AppContext } from './AppContext';
 import { requestGetAllFavorites } from './utils';
 import { getListArticle } from './utils';
 
-function HomeProvider({ children }) {
+function AppProvider({ children }) {
   const [articles, setArticles] = useState([]);
   const [query, setQuery] = useState('Água');
   const [inputChange, setInputChange] = useState('');
@@ -65,4 +65,4 @@ function HomeProvider({ children }) {
   );
 }
 
-export default HomeProvider;
+export default AppProvider;

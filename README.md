@@ -54,6 +54,8 @@ Obs: Só estão indo esse arquivo com a key, as configurações do banco de dado
 
 #### Crie o banco de dados
 
+Dentro da pasta back-end:
+
 ```bash
 npm run database
 ``` 
