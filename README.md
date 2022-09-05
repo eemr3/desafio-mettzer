@@ -41,7 +41,8 @@ Instale as dependências
 ```bash
   npm install
 ```
-## Entre na pasta `back-end`: 
+### Entre na pasta `back-end`: 
+
 #### Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
