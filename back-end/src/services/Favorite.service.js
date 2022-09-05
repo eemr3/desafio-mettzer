@@ -34,8 +34,7 @@ const createFavorite = async (data) => {
   };
 };
 
-const getAllFavorites = async (page) => {
-  const limit = 10;
+const getAllFavorites = async (page, limit) => {
   const offset = (page - 1) * limit;
   const favorites = await Favorite.findAll({
     offset,

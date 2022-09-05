@@ -1,9 +1,6 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppContext } from './AppContext';
 import { requestGetAllFavorites } from './utils';
-import { getListArticle } from './utils';
 
 function AppProvider({ children }) {
   const [articles, setArticles] = useState([]);
@@ -18,34 +15,20 @@ function AppProvider({ children }) {
     const getFavorites = async () => {
       try {
         const response = await requestGetAllFavorites(currentPage);
-        setTotalPagesFavorites(response.length);
-        console.log(response);
+
         setFavorites(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getFavorites();
-  }, [favorited, currentPage, setTotalPagesFavorites, setFavorites]);
-
-  useEffect(() => {
-    const allListArticle = async () => {
-      try {
-        const result = await getListArticle(query, currentPage);
-
-        setArticles(result.map((item) => ({ _type: item._type, ...item._source })));
       } catch (error) {
         console.info(error);
       }
     };
 
-    allListArticle();
-  }, [currentPage, query]);
+    getFavorites();
+  }, [currentPage]);
 
   return (
     <AppContext.Provider
       value={{
+        query,
         articles,
         setQuery,
         setInputChange,

@@ -22,8 +22,8 @@ const createFavorite = async (req, res) => {
 };
 
 const getAllFavorites = async (req, res) => {
-  const { page } = req.query;
-  const favorites = await Service.getAllFavorites(Number(page));
+  const { page, limit } = req.query;
+  const favorites = await Service.getAllFavorites(Number(page), Number(limit));
 
   return res.status(200).json(favorites);
 };

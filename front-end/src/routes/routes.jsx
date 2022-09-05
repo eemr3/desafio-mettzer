@@ -1,5 +1,4 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
-
 import AppProvider from '../context/AppProvider';
 import Favorites from '../pages/Favorites';
 import Home from '../pages/Home';
