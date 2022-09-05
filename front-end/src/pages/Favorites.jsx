@@ -3,10 +3,15 @@ import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
 import Table from '../components/Table';
 import { AppContext } from '../context/AppContext';
+// import { requestGetAllFavorites } from '../context/utils';
 
 const PageSize = 10;
 function Favorites() {
   const { currentPage, setCurrentPage, favorites } = useContext(AppContext);
+
+  const LIMIT = favorites.length + 10;
+
+  console.log(favorites.length);
 
   return (
     <>
@@ -14,7 +19,7 @@ function Favorites() {
       <Table articles={favorites} favorites={favorites} />
       <Pagination
         currentPage={currentPage}
-        totalCount={favorites.length + 10}
+        totalCount={LIMIT}
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />

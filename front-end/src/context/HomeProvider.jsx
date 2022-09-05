@@ -19,24 +19,15 @@ function HomeProvider({ children }) {
       try {
         const response = await requestGetAllFavorites(currentPage);
         setTotalPagesFavorites(response.length);
-        const dataFavorites = response.map((item) => ({
-          authors: item.authors.map((a) => a.authors),
-          _type: item._type,
-          title: item.title,
-          description: item.description,
-          idFav: item.id,
-          urls: item.urls.map((u) => u.url),
-          id: item.idArticle,
-        }));
-
-        setFavorites(dataFavorites);
+        console.log(response);
+        setFavorites(response);
       } catch (error) {
         console.log(error);
       }
     };
 
     getFavorites();
-  }, [favorited, currentPage]);
+  }, [favorited, currentPage, setTotalPagesFavorites, setFavorites]);
 
   useEffect(() => {
     const allListArticle = async () => {
@@ -63,9 +54,11 @@ function HomeProvider({ children }) {
         setCurrentPage,
         setArticles,
         favorites,
+        setFavorites,
         favorited,
         setFavorited,
         totalPagesFavorites,
+        setTotalPagesFavorites,
       }}>
       {children}
     </AppContext.Provider>
