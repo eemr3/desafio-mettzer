@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "(cd back-end && npm install); (cd front-end && npm install)",
-    "install:apps": "(cd back-end && npm install); (cd front-end && npm install)"
+    "install:apps": "(cd back-end && npm install); (cd front-end && npm install)",
+    "database": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "drop": "npx sequelize-cli db:drop"
   },
   "repository": {
     "type": "git",
