@@ -14,7 +14,7 @@ Observação: Se tiver o docker instalado e não tiver o mysql, basta cria um co
 
 Exemplro de um container myslq na versão 8
 
-Use esse comando no termina
+Use esse comando no terminal
 ```bash
 docker run -p 3306:3306 --name mysql_80 -e MYSQL_ROOT_PASSWORD=12345678 -d mysql:8 mysqld --default-authentication-plugin=mysql_native_password
 
@@ -45,10 +45,11 @@ Instale as dependências
 
 #### Variáveis de Ambiente
 
-Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+Para rodar esse projeto, você vai precisar seguir as intruções abaixo:
+
+- Dentro da pasta `back-end` renomei o arquivo `.env.exemple` para `.env`, ele contem os valores da configuração do banco de dados. Altere os valores se necessário!
 
 - Renomei o arquivo `secrete.key.exemple` para `secrete.key`, ele já contem a chave secreta para o JWT.
-- Renomei o arquivo `.env.exemple` para `.env`, ele contem os valores da configuração do banco de dados. Altere os valores se necessário!
 
 
 Obs: Só estão indo esse arquivo com a key, as configurações do banco de dados e a chave secreta por motivo de desafio, em um projeto rael esses valores não sobem para o github.
@@ -67,11 +68,8 @@ O banco de dados é criado com as tabelas `users`, `favorites`, `authors` e `url
 email: ichigo@email.com
 senha: 123456
 ```
+Para rodar o back-end digite o comando: 
 
-```bash
-  cd back-end
-```
-Digite o comando: 
 ```bash
 npm run dev
 ```
@@ -84,14 +82,15 @@ npm run dev
 
 #### Variáveis de Ambiente
 
-Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+Para rodar esse projeto, você vai precisar seguir as intruções abaixo:
 
-Dentro da pasta `font-end` e renomei o arquivo `.env.development.exemple` para `.env.development`, ele já contem a key para o acesso a api CORE API.
+Dentro da pasta `font-end` renomei o arquivo `.env.development.exemple` para `.env.development`, ele já contem a key para o acesso a api CORE API.
 
-Digite o comando:
+Para rodar o front-end digite o comando:
 ```bash
 npm start
 ```
+Obs: O back-end deve estar rodando para o front-end funcionar!
 
 ## Informção do Front-end da aplicação
 
