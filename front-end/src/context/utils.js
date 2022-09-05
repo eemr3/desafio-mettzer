@@ -27,15 +27,22 @@ export const requestSaveFavorite = async (data) => {
 };
 
 export const requestGetAllFavorites = async (page) => {
-  console.log(page);
   const token = Cookies.get('token');
-  const response = await api.get(`/favorites?page=${page === 0 ? 1 : page}`, {
+  const favoriteData = await api.get(`/favorites?page=${page}`, {
     headers: {
       authorization: token,
     },
   });
-
-  return response.data;
+  const response = favoriteData.data.map((item) => ({
+    authors: item.authors.map((a) => a.authors),
+    _type: item._type,
+    title: item.title,
+    description: item.description,
+    idFav: item.id,
+    urls: item.urls.map((u) => u.url),
+    id: item.idArticle,
+  }));
+  return response;
 };
 
 export const requestDeleteFavorite = async (id) => {

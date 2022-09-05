@@ -3,7 +3,7 @@ const errorBase = require('../utils/errorBase');
 
 const createFavorite = async (data) => {
   const { authors, _type, title, description, urls, id, idArticle } = data;
-  console.log(_type);
+
   const favorite = await Favorite.create({
     title,
     description,
@@ -35,8 +35,8 @@ const createFavorite = async (data) => {
 };
 
 const getAllFavorites = async (page) => {
-  const offset = (page - 1) * 10;
   const limit = 10;
+  const offset = (page - 1) * limit;
   const favorites = await Favorite.findAll({
     offset,
     limit,
