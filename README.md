@@ -41,11 +41,11 @@ Instale as dependências
 ```bash
   npm install
 ```
+## Entre na pasta `back-end`: 
 #### Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
 
-Entre na pasta `back-end`: 
 - Renomei o arquivo `secrete.key.exemple` para `secrete.key`, ele já contem a chave secreta para o JWT.
 - Renomei o arquivo `.env.exemple` para `.env`, ele contem os valores da configuração do banco de dados. Altere os valores se necessário!
 
@@ -67,8 +67,6 @@ email: ichigo@email.com
 senha: 123456
 ```
 
-No diretório do back-end
-
 ```bash
   cd back-end
 ```
@@ -77,7 +75,7 @@ Digite o comando:
 npm run dev
 ```
 
-Entre no diretório do front-end
+## Entre no diretório do ``front-end``
 
 ```bash
   cd front-end
