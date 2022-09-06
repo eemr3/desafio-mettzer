@@ -22,7 +22,7 @@ export default function SearchBar({ isRender }) {
   };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800 mb-2">
+    <Disclosure as="nav" data-testid="navbar-test" className="bg-gray-800 mb-2">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -48,6 +48,7 @@ export default function SearchBar({ isRender }) {
                           type="text"
                           name="search"
                           value={inputChange}
+                          placeholder="Digite sua busca"
                           onChange={(e) => setInputChange(e.target.value)}
                         />
                         <button

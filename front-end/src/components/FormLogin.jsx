@@ -36,13 +36,16 @@ export default function FormLogin() {
             <input
               id="email-address"
               name="email"
-              type="email"
+              type="text"
               autoComplete="email"
               className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="Endereço de e-mail"
               value={formik.values.email}
               onChange={formik.handleChange}
             />
+            {formik.touched.email && formik.errors.email && (
+              <span className="text-red-500 text-sm">{formik.errors.email}</span>
+            )}
           </div>
           <div>
             <label htmlFor="password" className="sr-only">
@@ -58,6 +61,9 @@ export default function FormLogin() {
               value={formik.values.password}
               onChange={formik.handleChange}
             />
+            {formik.touched.password && formik.errors.password && (
+              <span className="text-red-500 text-sm">{formik.errors.password}</span>
+            )}
           </div>
         </div>
 
