@@ -30,17 +30,19 @@ export default function Pagination({
   let lastPage = paginationRange[paginationRange.length - 1];
 
   return (
-    <div className="container flex items-center justify-between self-center border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div
+      data-testid="pagination"
+      className="container flex items-center justify-between self-center border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between items-center sm:hidden">
         <button
-          onClick={() => onPageChange(currentPage)}
+          onClick={() => onPageChange(onPrevious)}
           disabled={currentPage === 1}
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
           Previous
         </button>
         <span>{currentPage}</span>
         <button
-          onClick={onPrevious}
+          onClick={onNext}
           disabled={currentPage === lastPage}
           className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
           Next
