@@ -102,6 +102,7 @@ npm run test:coverage
 ### Front-end
 Entre na pasta ``front-end`` e use o comando:
 ```bash
+npm test
 ```
 
 ## Informção do Front-end da aplicação
