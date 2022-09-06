@@ -6,7 +6,7 @@ import ButtonFavorite from './ButtonFavorite';
 function Table({ articles, favorites }) {
   const location = useLocation();
   const history = useHistory();
-  const { currentPage, setCurrentPage } = useContext(AppContext);
+  const { currentPage, setCurrentPage, isLoading } = useContext(AppContext);
 
   const handleBack = () => {
     if (currentPage === 1) {
@@ -16,9 +16,12 @@ function Table({ articles, favorites }) {
     }
   };
 
-  return articles.length === 0 ? (
-    <div className="flex justify-center items-center h-screen" role="status">
-      {location.pathname === '/home' ? (
+  if (isLoading && location.pathname === '/home') {
+    return (
+      <div
+        data-testid="isloading-home"
+        className="flex justify-center items-center h-screen"
+        role="status">
         <>
           <svg
             aria-hidden="true"
@@ -37,7 +40,11 @@ function Table({ articles, favorites }) {
           </svg>
           <span className="sr-only">Loading...</span>
         </>
-      ) : (
+      </div>
+    );
+  } else if (articles.length === 0 && location.pathname === '/favorites') {
+    return (
+      <div className="flex justify-center items-center h-screen" role="status">
         <div className="flex flex-col items-center">
           <svg
             aria-hidden="true"
@@ -59,10 +66,12 @@ function Table({ articles, favorites }) {
             Voltar
           </button>
         </div>
-      )}
-    </div>
-  ) : (
-    <div>
+      </div>
+    );
+  }
+
+  return (
+    <div data-testid="table-article">
       <div className="lg:w-11/12 m-auto">
         <div className="w-full">
           <div className="lg:max-w-full m-0 overflow-x-auto">
@@ -90,44 +99,42 @@ function Table({ articles, favorites }) {
                 </tr>
               </thead>
               <tbody>
-                {articles.length === 0
-                  ? ''
-                  : articles.map((item) => (
-                      <tr key={item.id}>
-                        <td className="max-w-xs text-center truncate text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                          {item.authors.slice(0, 2).map((aut, ind) => (
-                            <span key={`${item.id}-${aut}__${ind}`}>{aut}</span>
-                          ))}
-                        </td>
-                        <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                          {item._type}
-                        </td>
-                        <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                          {item.title}
-                        </td>
-                        <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                          {item.description}
-                        </td>
-                        <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                          {item.urls.slice(0, 2).map((url, ind) => (
-                            <a
-                              className="mr-2"
-                              key={`${url}-${item.id}`}
-                              href={url}
-                              target="_blank"
-                              rel="noreferrer">
-                              Link-{ind + 1}
-                            </a>
-                          ))}
-                        </td>
-                        <td className="flex justify-center text-center max-w-md  py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                          <ButtonFavorite
-                            favData={item.id}
-                            checked={favorites.some((t) => t.id === Number(item.id))}
-                          />
-                        </td>
-                      </tr>
-                    ))}
+                {articles.map((item) => (
+                  <tr key={item.id}>
+                    <td className="max-w-xs text-center truncate text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                      {item.authors.slice(0, 2).map((aut, ind) => (
+                        <span key={`${item.id}-${aut}__${ind}`}>{aut}</span>
+                      ))}
+                    </td>
+                    <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                      {item._type}
+                    </td>
+                    <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                      {item.title}
+                    </td>
+                    <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                      {item.description}
+                    </td>
+                    <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                      {item.urls.slice(0, 2).map((url, ind) => (
+                        <a
+                          className="mr-2"
+                          key={`${url}-${item.id}`}
+                          href={url}
+                          target="_blank"
+                          rel="noreferrer">
+                          Link-{ind + 1}
+                        </a>
+                      ))}
+                    </td>
+                    <td className="flex justify-center text-center max-w-md  py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                      <ButtonFavorite
+                        favData={item.id}
+                        checked={favorites.some((t) => t.id === Number(item.id))}
+                      />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

@@ -7,7 +7,9 @@
     "database": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "dev": "nodemon ./src/api/server.js",
     "drop": "npx sequelize-cli db:drop",
-    "seed": "npx sequelize-cli db:seed:all"
+    "seed": "npx sequelize-cli db:seed:all",
+    "test": "mocha ./src/tests/**/*$NAME*.test.js --exit",
+    "test:coverage": "nyc mocha --all --include models --include services --include controllers ./src/tests/**/*$NAME*.test.js --exit"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +21,15 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
+    "nyc": "^15.1.0",
     "sequelize": "^6.21.4"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
-    "sequelize-cli": "^6.4.1"
+    "sequelize-cli": "^6.4.1",
+    "sinon": "^14.0.0"
   }
 }

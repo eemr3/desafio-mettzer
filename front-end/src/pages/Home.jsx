@@ -7,22 +7,33 @@ import { getListArticle } from '../context/utils';
 
 const PageSize = 10;
 function Home() {
-  const { currentPage, setCurrentPage, articles, favorites, query, setArticles } =
-    useContext(AppContext);
+  const {
+    currentPage,
+    setCurrentPage,
+    articles,
+    favorites,
+    query,
+    setArticles,
+    setIsLoading,
+  } = useContext(AppContext);
 
   useEffect(() => {
     const allListArticle = async () => {
+      setIsLoading(true);
       try {
         const result = await getListArticle(query, currentPage);
 
         setArticles(result.map((item) => ({ _type: item._type, ...item._source })));
+        if (result.length > 0) {
+          setIsLoading(false);
+        }
       } catch (error) {
         console.info(error);
       }
     };
 
     allListArticle();
-  }, [currentPage, query, setArticles]);
+  }, [currentPage, query, setArticles, setIsLoading]);
 
   return (
     <>

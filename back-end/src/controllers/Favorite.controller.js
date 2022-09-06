@@ -33,6 +33,9 @@ const destroyFovorite = async (req, res) => {
     await Service.destroyFovorite(req.params.id);
     return res.status(200).json({ message: 'Desfavoritado com sucesso' });
   } catch (error) {
+    if (!error.statu) {
+      return res.statu(500).json({ message: error.message });
+    }
     return res.status(error.status).json({ message: error.message });
   }
 };

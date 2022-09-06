@@ -22,7 +22,7 @@ export default function SearchBar({ isRender }) {
   };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800 mb-2">
+    <Disclosure as="nav" data-testid="navbar-test" className="bg-gray-800 mb-2">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -48,6 +48,7 @@ export default function SearchBar({ isRender }) {
                           type="text"
                           name="search"
                           value={inputChange}
+                          placeholder="Digite sua busca"
                           onChange={(e) => setInputChange(e.target.value)}
                         />
                         <button
@@ -68,7 +69,9 @@ export default function SearchBar({ isRender }) {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button
+                      data-testid="menu-profile"
+                      className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Abrir menu de usuario</span>
                       <img
                         className="h-8 w-8 rounded-full"

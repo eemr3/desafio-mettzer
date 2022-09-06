@@ -14,23 +14,28 @@ function Favorites() {
     favorites,
     setTotalPagesFavorites,
     setFavorites,
+    setIsLoading,
   } = useContext(AppContext);
-  const LIMIT = favorites.length + 10;
+  const LIMIT = favorites ? favorites.length + 10 : null;
 
   useEffect(() => {
     const getFavorites = async () => {
+      setIsLoading(true);
       try {
         const response = await requestGetAllFavorites(currentPage);
         setTotalPagesFavorites(response.length);
         console.info(response);
         setFavorites(response);
+        if (response.length > 0) {
+          setIsLoading(false);
+        }
       } catch (error) {
         console.info(error);
       }
     };
 
     getFavorites();
-  }, [favorited, currentPage, setTotalPagesFavorites, setFavorites]);
+  }, [favorited, currentPage, setTotalPagesFavorites, setFavorites, setIsLoading]);
 
   return (
     <>

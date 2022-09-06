@@ -92,6 +92,18 @@ npm start
 ```
 Obs: O back-end deve estar rodando para o front-end funcionar!
 
+## Rodando tests
+
+### Back-end
+Entre na pasta ``back-end`` e use o comando:
+```bash
+npm run test:coverage
+```
+### Front-end
+Entre na pasta ``front-end`` e use o comando:
+```bash
+```
+
 ## Informção do Front-end da aplicação
 
 - Diretório do Front-end
