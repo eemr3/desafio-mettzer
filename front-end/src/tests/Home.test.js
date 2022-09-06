@@ -4,6 +4,7 @@ import renderWithRouter from './helpers/renderWithRouter';
 import Home from '../pages/Home';
 import AppProvider from '../context/AppProvider';
 import Table from '../components/Table';
+import userEvent from '@testing-library/user-event';
 
 afterEach(cleanup);
 
@@ -18,6 +19,22 @@ describe('Tela de Home', () => {
     await screen.findByTestId('navbar-test');
     await screen.findByPlaceholderText('Digite sua busca');
     await screen.findByRole('button', { name: /Buscar/i });
+  });
+
+  it('verifica se ao clicar na opção "Meus favoritos" navega para "/favorites"', async () => {
+    const { history } = renderWithRouter(
+      <AppProvider>
+        <Home />
+      </AppProvider>,
+    );
+
+    await screen.findByTestId('navbar-test');
+    const menu = await screen.findByTestId('menu-profile');
+    userEvent.click(menu);
+    const item = await screen.findByText('Meus favoritos');
+    userEvent.click(item);
+    const path = history.location.pathname;
+    expect(path).toBe('/favorites');
   });
 
   it('renderiz barra de paginação', async () => {
