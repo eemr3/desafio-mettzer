@@ -1,6 +1,6 @@
 # Lista de Artigos
 
-Aplicação que realizar requisição para a API [CORE API](https://core.ac.uk/docs/#!/all/search).
+Aplicação que realiza requisição para a API[CORE API](https://core.ac.uk/docs/#!/all/search). Este projeto foi desenvolvido para um desafio, consistem em um frontend feito utilizando React.Js e um backend utilizando Node.Js com express.
 
 ## Requisitos
 
