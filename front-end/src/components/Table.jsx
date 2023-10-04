@@ -1,21 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
 import { useContext } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { AppContext } from '../context/AppContext';
 import ButtonFavorite from './ButtonFavorite';
 
 function Table({ articles, favorites }) {
   const location = useLocation();
-  const history = useHistory();
-  const { currentPage, setCurrentPage, isLoading } = useContext(AppContext);
-
-  const handleBack = () => {
-    if (currentPage === 1) {
-      history.push('/home');
-    } else {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  const { isLoading } = useContext(AppContext);
 
   if (isLoading && location.pathname === '/home') {
     return (
