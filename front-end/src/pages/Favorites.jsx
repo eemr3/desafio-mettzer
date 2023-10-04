@@ -1,31 +1,26 @@
-import { useContext, useEffect } from 'react';
-import Pagination from '../components/Pagination';
+import React, { useContext, useEffect, useState } from 'react';
+import Pagination from '../components/Pagination'; // Importe o componente de paginação
 import SearchBar from '../components/SearchBar';
 import Table from '../components/Table';
 import { AppContext } from '../context/AppContext';
 import { requestGetAllFavorites } from '../context/utils';
 
-const PageSize = 10;
 function Favorites() {
-  const {
-    favorited,
-    currentPage,
-    setCurrentPage,
-    favorites,
-    setTotalPagesFavorites,
-    setFavorites,
-    setIsLoading,
-  } = useContext(AppContext);
-  const LIMIT = favorites ? favorites.length + 10 : null;
+  const { favorited, setTotalPagesFavorites, favorites, setFavorites, setIsLoading } =
+    useContext(AppContext);
+  const [offset, setOffset] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     const getFavorites = async () => {
       setIsLoading(true);
       try {
-        const response = await requestGetAllFavorites(currentPage);
-        setTotalPagesFavorites(response.length);
-        console.info(response);
-        setFavorites(response);
+        const page = Math.floor(offset / 10) === 0 ? 1 : Math.floor(offset / 10 + 1);
+
+        const response = await requestGetAllFavorites(page);
+        setTotalItems(response.totalItems);
+
+        setFavorites(response.items);
         if (response.length > 0) {
           setIsLoading(false);
         }
@@ -35,17 +30,19 @@ function Favorites() {
     };
 
     getFavorites();
-  }, [favorited, currentPage, setTotalPagesFavorites, setFavorites, setIsLoading]);
+  }, [favorited, offset, setTotalPagesFavorites, setFavorites, setIsLoading]);
 
   return (
     <>
       <SearchBar isRender={false} />
-      <Table articles={favorites} favorites={favorites} />
+      <div className="h-[65%]">
+        <Table articles={favorites} favorites={favorites} />
+      </div>
       <Pagination
-        currentPage={currentPage}
-        totalCount={LIMIT}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
+        limit={10}
+        total={totalItems && totalItems}
+        offset={offset}
+        setOffset={setOffset}
       />
     </>
   );
