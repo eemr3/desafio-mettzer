@@ -1,4 +1,4 @@
-const { Favorite, Author, Url } = require('../database/models');
+const { Favorite, Author, Url, sequelize } = require('../database/models');
 const errorBase = require('../utils/errorBase');
 
 const createFavorite = async (data) => {
@@ -35,6 +35,7 @@ const createFavorite = async (data) => {
 };
 
 const getAllFavorites = async (page, limit) => {
+  const totalItems = await Favorite.count({ distinct: true, col: 'id' });
   const offset = (page - 1) * limit;
   const favorites = await Favorite.findAll({
     offset,
@@ -44,8 +45,11 @@ const getAllFavorites = async (page, limit) => {
       { model: Url, as: 'urls' },
     ],
   });
-
-  return favorites;
+  console.log(totalItems);
+  return {
+    totalItems,
+    favorites,
+  };
 };
 
 const destroyFovorite = async (id) => {

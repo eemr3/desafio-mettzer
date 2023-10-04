@@ -33,7 +33,8 @@ export const requestGetAllFavorites = async (page) => {
       authorization: token,
     },
   });
-  const response = favoriteData.data.map((item) => ({
+
+  const response = favoriteData.data.favorites.map((item) => ({
     authors: item.authors.map((a) => a.authors),
     _type: item._type,
     title: item.title,
@@ -42,7 +43,7 @@ export const requestGetAllFavorites = async (page) => {
     urls: item.urls.map((u) => u.url),
     id: item.idArticle,
   }));
-  return response;
+  return { totalItems: favoriteData.data.totalItems, items: response };
 };
 
 export const requestDeleteFavorite = async (id) => {

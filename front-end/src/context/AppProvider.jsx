@@ -18,7 +18,7 @@ function AppProvider({ children }) {
       try {
         const response = await requestGetAllFavorites(currentPage);
 
-        setFavorites(response);
+        setFavorites(response.items);
         setIsLoading(false);
       } catch (error) {
         console.info(error);
@@ -47,7 +47,8 @@ function AppProvider({ children }) {
         setTotalPagesFavorites,
         isLoading,
         setIsLoading,
-      }}>
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
