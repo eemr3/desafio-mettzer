@@ -1,5 +1,4 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const MAX_ITEMS = 10;

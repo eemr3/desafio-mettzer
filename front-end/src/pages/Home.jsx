@@ -14,10 +14,9 @@ function Home() {
     const allListArticle = async () => {
       setIsLoading(true);
       try {
-        console.log(offset);
         const result = await getListArticle(query, offset);
 
-        setArticles(result.map((item) => ({ _type: item._type, ...item._source })));
+        setArticles(result.map((item) => ({ type: item._type, ...item._source })));
         if (result.length > 0) {
           setIsLoading(false);
         }

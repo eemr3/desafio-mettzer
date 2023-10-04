@@ -11,8 +11,9 @@ function AuthProvider({ children }) {
   const signIn = async (values) => {
     try {
       const response = await requestSignIn(values);
-      Cookie.set('token', response.token);
-      setToken(response.token);
+
+      Cookie.set('token', response.access_token);
+      setToken(response.access_token);
       history.push('/home');
     } catch (err) {
       console.log(err);

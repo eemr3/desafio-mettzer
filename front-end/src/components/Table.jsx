@@ -6,6 +6,8 @@ import ButtonFavorite from './ButtonFavorite';
 
 function Table({ articles, favorites }) {
   const location = useLocation();
+  const isFavorite = location.pathname === '/favorites';
+
   const { isLoading } = useContext(AppContext);
 
   if (isLoading && location.pathname === '/home') {
@@ -67,43 +69,49 @@ function Table({ articles, favorites }) {
                 </tr>
               </thead>
               <tbody>
-                {articles.map((item) => (
-                  <tr key={uuidv4()}>
-                    <td className="max-w-xs text-center truncate text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                      {item.authors.slice(0, 2).map((aut, ind) => (
-                        <span key={uuidv4()}>{aut}</span>
-                      ))}
-                    </td>
-                    <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                      {item._type}
-                    </td>
-                    <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                      {item.title}
-                    </td>
-                    <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                      {item.description}
-                    </td>
-                    <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                      {item.urls.slice(0, 2).map((url, ind) => (
-                        <a
-                          className="mr-2"
-                          key={uuidv4()}
-                          href={url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Link-{ind + 1}
-                        </a>
-                      ))}
-                    </td>
-                    <td className="flex justify-center text-center max-w-md  py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                      <ButtonFavorite
-                        favData={item.id}
-                        checked={favorites.some((t) => t.id === Number(item.id))}
-                      />
-                    </td>
-                  </tr>
-                ))}
+                {articles.map((item) => {
+                  return (
+                    <tr key={uuidv4()}>
+                      <td className="max-w-xs text-center truncate text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                        {item.authors.slice(0, 2).map((aut, ind) => (
+                          <span key={uuidv4()}>{aut}</span>
+                        ))}
+                      </td>
+                      <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                        {item.type}
+                      </td>
+                      <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                        {item.title}
+                      </td>
+                      <td className="max-w-sm truncate text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                        {item.description}
+                      </td>
+                      <td className="text-center text-dark font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                        {item.urls.slice(0, 2).map((url, ind) => (
+                          <a
+                            className="mr-2"
+                            key={uuidv4()}
+                            href={url}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Link-{ind + 1}
+                          </a>
+                        ))}
+                      </td>
+                      <td className="flex justify-center text-center max-w-md  py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                        <ButtonFavorite
+                          favData={isFavorite ? item.articleId : item.id}
+                          checked={favorites.some((t) =>
+                            isFavorite
+                              ? t.articleId === item.articleId
+                              : t.articleId === Number(item.id),
+                          )}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

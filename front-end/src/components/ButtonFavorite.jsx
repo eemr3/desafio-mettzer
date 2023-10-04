@@ -9,10 +9,11 @@ export default function ButtonFavorite({ favData, checked }) {
 
   const handleSaveFavorite = async () => {
     const result = articles.find((item) => Number(item.id) === Number(favData));
+
     const data = {
-      idArticle: result.id,
+      articleId: result.id,
       authors: result.authors,
-      _type: result._type,
+      type: result.type,
       title: result.title,
       description: result.description,
       urls: result.urls,
@@ -27,11 +28,11 @@ export default function ButtonFavorite({ favData, checked }) {
   };
 
   const handleUnfavorite = async () => {
-    const result = favorites.find((item) => item.id === Number(favData));
-    console.info(result);
+    const result = favorites.find((item) => item.articleId === +favData);
+
     try {
-      await requestDeleteFavorite(result.idFav);
-      setIsFavorite(false);
+      await requestDeleteFavorite(result.articleId);
+      setIsFavorite(!isFavorite);
       setFavorited(!favorited);
     } catch (error) {
       console.info(error);

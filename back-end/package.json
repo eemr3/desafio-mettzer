@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "database": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "dev": "nodemon ./src/api/server.js",
+    "dev": "tsnd --respawn --transpile-only src/server.ts",
     "drop": "npx sequelize-cli db:drop",
     "seed": "npx sequelize-cli db:seed:all",
     "test": "mocha ./src/tests/**/*$NAME*.test.js --exit",
@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.3.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
@@ -25,11 +26,19 @@
     "sequelize": "^6.21.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.4",
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.18",
+    "@types/jsonwebtoken": "^9.0.3",
+    "@types/node": "^20.8.2",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
+    "prisma": "^5.3.1",
     "sequelize-cli": "^6.4.1",
-    "sinon": "^14.0.0"
+    "sinon": "^14.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
   }
 }

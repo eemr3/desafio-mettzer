@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AppContext } from './AppContext';
 import { requestGetAllFavorites } from './utils';
+import { useLocation } from 'react-router-dom';
 
 function AppProvider({ children }) {
+  const { pathname } = useLocation();
   const [articles, setArticles] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [query, setQuery] = useState('Água');
@@ -14,19 +16,21 @@ function AppProvider({ children }) {
 
   useEffect(() => {
     const getFavorites = async () => {
-      setIsLoading(true);
-      try {
-        const response = await requestGetAllFavorites(currentPage);
+      if (pathname === '/home') {
+        setIsLoading(true);
+        try {
+          const response = await requestGetAllFavorites();
 
-        setFavorites(response.items);
-        setIsLoading(false);
-      } catch (error) {
-        console.info(error);
+          setFavorites(response.items);
+          setIsLoading(false);
+        } catch (error) {
+          console.info(error);
+        }
       }
     };
 
     getFavorites();
-  }, [currentPage]);
+  }, [currentPage, favorited, pathname]);
 
   return (
     <AppContext.Provider
