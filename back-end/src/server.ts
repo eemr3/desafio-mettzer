@@ -3,6 +3,7 @@ import { join } from 'path';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { decodedToken } from './auth/authToken';
+import cors from 'cors';
 import { prisma } from './database/prisma/prisma.service';
 import { AuthResolver } from './resolvers/auth.resolver';
 import { FavoriteResolver } from './resolvers/favorite.resolver';
@@ -41,6 +42,9 @@ async function bootstrap() {
   const server = new ApolloServer({
     schema,
     context: ({ req }: any) => ({ req }),
+    cors: {
+      origin: ['http://localhost:3000', 'http://127.0.0.1:5173'],
+    },
   });
 
   server.listen().then(({ url }) => console.log(`🚀  Server ready at ${url}`));
