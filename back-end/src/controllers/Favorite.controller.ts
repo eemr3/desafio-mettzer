@@ -4,7 +4,7 @@ import {
   createFavoriteService,
   getAllFavoritesService,
   destroyFovoriteService,
-} from '../services/Favorite.service';
+} from '../services/favorite.service';
 
 export const createFavorite = async (req: RequestWithUser, res: Response) => {
   const id = req.user?.id;

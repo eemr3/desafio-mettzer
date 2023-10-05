@@ -5,7 +5,8 @@ interface IData {
   fullName: string;
   email: string;
 }
-const SECRETE_KEY = process.env.JWT_SECRETE as string;
+const SECRETE_KEY =
+  process.env.JWT_SECRETE || 'qualquerstringpodesercolocadaaquidentrodessasaspas:)';
 export const generateToken = async (data: IData) => {
   const token = jwt.sign(data, SECRETE_KEY, {
     algorithm: 'HS256',
@@ -15,7 +16,7 @@ export const generateToken = async (data: IData) => {
   return token;
 };
 
-export const decodedToken = async (token: string) => {
+export const decodedToken = (token: string) => {
   try {
     const decoded = jwt.verify(token, SECRETE_KEY);
 
