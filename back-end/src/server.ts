@@ -1,39 +1,49 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors';
+import { ApolloServer } from 'apollo-server';
+import { join } from 'path';
+import 'reflect-metadata';
+import { buildSchema } from 'type-graphql';
+import { decodedToken } from './auth/authToken';
 import { prisma } from './database/prisma/prisma.service';
-import Userroutes from './routes/User/User.routes';
-import LoginRoutes from './routes/SignIn/SingIn.routes';
-import FavoriteRoutes from './routes/Favorite/Favorite.routes';
+import { AuthResolver } from './resolvers/auth.resolver';
+import { FavoriteResolver } from './resolvers/favorite.resolver';
+import { UserResolver } from './resolvers/user.resolver';
 
-const PORT = 4000;
-const app = express();
+async function bootstrap() {
+  const schema = await buildSchema({
+    resolvers: [UserResolver, AuthResolver, FavoriteResolver],
+    emitSchemaFile: join(process.cwd(), 'schema.gql'),
+    validate: false,
+    authChecker: async ({ context: { req } }) => {
+      const token = req.headers.authorization;
 
-async function main() {
-  app.use(express.json());
-  app.use(cors());
-  app.use('/users', Userroutes);
-  app.use('/login', LoginRoutes);
+      if (token) {
+        const decode = decodedToken(token);
+        if (decode) {
+          req.user = decode;
 
-  app.use('/favorites', FavoriteRoutes);
-
-  app.get('/users/:id', async (req: Request, res: Response) => {
-    const user = await prisma.user.findUnique({
-      where: { id: req.params.id },
-      include: {
-        Favorite: true,
-      },
-    });
-    return res.status(200).json(user);
+          return true;
+        }
+      }
+      throw new Error(
+        'Acesso negado! Você precisa estar autorizado para realizar esta ação!',
+      );
+    },
   });
-  app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
-}
 
-main()
-  .then(async () => {
+  try {
     await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     await prisma.$disconnect();
     process.exit(1);
+  }
+
+  const server = new ApolloServer({
+    schema,
+    context: ({ req }: any) => ({ req }),
   });
+
+  server.listen().then(({ url }) => console.log(`🚀  Server ready at ${url}`));
+}
+
+bootstrap();
