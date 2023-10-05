@@ -3,7 +3,6 @@ import { join } from 'path';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { decodedToken } from './auth/authToken';
-import cors from 'cors';
 import { prisma } from './database/prisma/prisma.service';
 import { AuthResolver } from './resolvers/auth.resolver';
 import { FavoriteResolver } from './resolvers/favorite.resolver';
