@@ -1,8 +1,8 @@
-import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql';
 
 import { IUser } from '../types/user';
 import { FavoriteService } from '../services/favorite.service';
-import { Favorite, InputFavorite } from '../types/favorite';
+import { Favorite, GetAllFavorites, InputFavorite } from '../types/favorite';
 
 @Resolver()
 export class FavoriteResolver {
@@ -18,6 +18,22 @@ export class FavoriteResolver {
       userId: id,
     });
 
-    return 'Teste';
+    return favorite;
+  }
+
+  @Authorized()
+  @Query(() => GetAllFavorites)
+  async getAllFavorites(@Arg('limit') limit: number) {
+    const favorites = await this.favoriteService.getAllFavoritesService(limit);
+
+    return favorites;
+  }
+
+  @Authorized()
+  @Mutation(() => Favorite)
+  async removeFavorite(@Arg('id') id: number): Promise<Favorite> {
+    const result = await this.favoriteService.destroyFovoriteService(id);
+
+    return result;
   }
 }

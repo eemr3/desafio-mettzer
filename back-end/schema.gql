@@ -9,18 +9,23 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Favorite {
-  articleId: Float!
+  articleId: Int!
   authors: [String!]!
   createdAt: DateTime!
   description: String!
-  id: String!
+  id: ID!
   title: String!
   type: String!
   urls: [String!]!
 }
 
+type GetAllFavorites {
+  favorites: [Favorite!]!
+  totalItems: Int!
+}
+
 input InputFavorite {
-  articleId: Float!
+  articleId: Int!
   authors: [String!]!
   description: String!
   title: String!
@@ -43,9 +48,11 @@ type Mutation {
   createFavorite(data: InputFavorite!): Favorite!
   createUser(data: InputUser!): User!
   login(data: InputLogin!): TokenJwt!
+  removeFavorite(id: Float!): Favorite!
 }
 
 type Query {
+  getAllFavorites(limit: Float!): GetAllFavorites!
   users: [User!]!
 }
 

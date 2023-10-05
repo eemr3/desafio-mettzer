@@ -8,6 +8,7 @@ export class FavoriteService {
         articleId: Number(data.articleId),
       },
     });
+
     return favorite;
   }
 
@@ -15,7 +16,7 @@ export class FavoriteService {
     const totalItems = await prisma.favorite.count();
 
     const PAGE_SIZE = 10;
-    const skip = limit ? (limit - 1) * PAGE_SIZE : 0;
+    const skip = !limit || limit === 0 ? 0 : (limit - 1) * PAGE_SIZE;
 
     const favorites = await prisma.favorite.findMany({
       select: {
@@ -25,6 +26,7 @@ export class FavoriteService {
         title: true,
         type: true,
         urls: true,
+        id: true,
       },
       skip,
       take: limit ? PAGE_SIZE : 100,
@@ -44,6 +46,10 @@ export class FavoriteService {
       throw new Error('Favorito não encontrado');
     }
 
-    await prisma.favorite.delete({ where: { id: existFavorite.id } });
+    const deletedFavorite = await prisma.favorite.delete({
+      where: { id: existFavorite.id },
+    });
+
+    return deletedFavorite;
   }
 }

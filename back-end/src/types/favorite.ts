@@ -1,11 +1,11 @@
-import { Field, ID, InputType, ObjectType } from 'type-graphql';
+import { Field, ID, InputType, Int, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export class Favorite {
-  @Field()
+  @Field(() => ID)
   id?: string;
 
-  @Field()
+  @Field(() => Int)
   articleId: number;
 
   @Field()
@@ -27,9 +27,17 @@ export class Favorite {
   createdAt: Date;
 }
 
+@ObjectType()
+export class GetAllFavorites {
+  @Field(() => [Favorite])
+  favorites: Favorite;
+
+  @Field(() => Int)
+  totalItems: number;
+}
 @InputType()
 export class InputFavorite {
-  @Field()
+  @Field(() => Int)
   articleId: number;
 
   @Field()
