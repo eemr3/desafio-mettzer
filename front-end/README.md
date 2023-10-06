@@ -1,50 +1,36 @@
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-# Front-end da aplicação
+## Getting Started
 
-Aplicação web que consome um API que cadastra usuário, realiza login e cadastra tarefas do dia.
-
-
-## Demonstração
-
-![React-App](https://user-images.githubusercontent.com/42968718/188333852-0fcd3b4c-fa40-4d93-8689-d8f2e4517dfb.png)
-
-
-## Requisitos
-- NodeJs v14 ou superior
-Obs: Foi usado a vesão 16.15.1
-
-## Tecnologias usadas
-
-- ReactJs
-- Axios
-- Taiwindcss
-- React Router Dom
-
-## Funcionalidades
-
-- Login
-- Renderiza a busca feita a api CORE API
-- Cadastro de favoritos
-- Busca todos os favoritos
-- Apagar favoritos
-
-## Rodando localmente
-
-Entre no diretório do projeto
+First, run the development server:
 
 ```bash
-  cd front-end
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
-Inicie o App
 
-Observação: O App roda na porta `localhost:3000`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-  npm start
-```
-Observação: A API precisa estar rodando para que o front-end possa funcionar corretamente.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Autor
+## Learn More
 
-- [@eemr3](https://www.github.com/eemr3)
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
