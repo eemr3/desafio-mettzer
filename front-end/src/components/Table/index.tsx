@@ -3,13 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { IArticle, IFavorite } from '../../common/interfaces/articles';
 import { usePathname } from 'next/navigation';
 import ButtonFavorite from '../Buttons/ButtonFavorite';
+import { AppContext } from '../../context/AppContext';
 
 interface TableProps {
-  articles: IArticle[];
-  favorites: IFavorite[];
+  // articles: IArticle[];
+  // favorites: IFavorite[];
   isLoading: boolean;
 }
-function Table({ articles, favorites, isLoading }: TableProps) {
+function Table({ isLoading }: TableProps) {
+  const { articles, favorites } = useContext(AppContext);
   const pathname = usePathname();
   console.log(articles);
 
@@ -102,10 +104,10 @@ function Table({ articles, favorites, isLoading }: TableProps) {
                       ))}
                     </td>
                     <td className="flex justify-center text-center max-w-md  py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
-                      {/* <ButtonFavorite
-                        // favData={item.id}
-                        checked={favorites.some((t) => t.id === Number(item.id))}
-                      /> */}
+                      <ButtonFavorite
+                        favData={item.id}
+                        checked={favorites.some((t) => t.articleId === Number(item.id))}
+                      />
                     </td>
                   </tr>
                 ))}

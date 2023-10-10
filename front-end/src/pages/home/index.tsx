@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import NavBar from '../../components/SearchBar';
 import Table from '../../components/Table';
 import { api } from '../../service/api';
+import { AppContext } from '../../context/AppContext';
 
 function HomePage() {
+  const { setArticles } = useContext(AppContext);
   const [isLoading, setIsloading] = useState(true);
-  const [articles, setArticles] = useState([]);
+
   useEffect(() => {
     const getAllArticle = async () => {
       setIsloading(true);
@@ -30,7 +32,7 @@ function HomePage() {
   return (
     <div>
       <NavBar />
-      <Table articles={articles} favorites={[]} isLoading={isLoading} />
+      <Table isLoading={isLoading} />
     </div>
   );
 }

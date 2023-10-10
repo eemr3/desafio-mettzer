@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState } from 'react';
-import { IAppContext, IFavorites, iArticles } from '../common/interfaces/app-context.';
+import { IAppContext, IFavorites, IArticles } from '../common/interfaces/app-context.';
 
 export const AppContext = createContext<IAppContext>({} as IAppContext);
 
@@ -8,7 +8,7 @@ interface AppProviderProps {
 }
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [articles, setArticles] = useState<iArticles[]>([]);
+  const [articles, setArticles] = useState<IArticles[]>([]);
   const [favorites, setFavorites] = useState<IFavorites[]>([]);
   const [favorited, setFavorited] = useState(false);
   const [query, setQuery] = useState('');

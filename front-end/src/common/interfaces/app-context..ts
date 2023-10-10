@@ -1,6 +1,6 @@
 export interface IAppContext {
-  articles: iArticles[];
-  setArticles: (value: iArticles[]) => void;
+  articles: IArticles[];
+  setArticles: (value: IArticles[]) => void;
   favorites: IFavorites[];
   setFavorites: (value: IFavorites[]) => void;
   favorited: boolean;
@@ -11,13 +11,13 @@ export interface IAppContext {
   setInputChange: (value: string) => void;
 }
 
-export interface iArticles {
+export interface IArticles {
   id: number;
   title: string;
   description: string;
   authors: string[];
   urls: string[];
-  _type: string;
+  type: string;
 }
 
 export interface IFavorites {

@@ -17,3 +17,21 @@ export const CREATE_USE = gql`
     }
   }
 `;
+
+export const CREATE_FAVORITE = gql`
+  mutation CreateFavorite($data: InputFavorite!) {
+    createFavorite(data: $data) {
+      id
+      title
+    }
+  }
+`;
+
+export const REMOVE_FAVORITE = gql`
+  mutation RemoveFavorite($id: String!) {
+    removeFavorite(id: $id) {
+      id
+      title
+    }
+  }
+`;
