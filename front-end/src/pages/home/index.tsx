@@ -11,12 +11,12 @@ function HomePage() {
   useEffect(() => {
     const getAllArticle = async () => {
       setIsloading(true);
-      const result = await api.get(
+      const { data } = await api.get(
         `/search/água?1&pageSize=10&apiKey=${process.env.NEXT_PUBLIC_APIKEY_CORE}`,
       );
 
       setArticles(
-        result.data?.data.map((item: any) => {
+        data?.data.map((item: any) => {
           return {
             id: item._id,
             ...item._source,
@@ -27,7 +27,7 @@ function HomePage() {
       setIsloading(false);
     };
     getAllArticle();
-  }, []);
+  }, [setArticles]);
 
   return (
     <div>

@@ -14,7 +14,6 @@ async function bootstrap() {
     emitSchemaFile: join(process.cwd(), 'schema.gql'),
     validate: false,
     authChecker: async ({ context: { req } }) => {
-      console.log(req.headers.authorization);
       const token = req.headers.authorization;
 
       if (token) {

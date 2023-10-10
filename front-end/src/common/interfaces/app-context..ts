@@ -9,6 +9,7 @@ export interface IAppContext {
   setQuery: (value: string) => void;
   inputChange: string;
   setInputChange: (value: string) => void;
+  data: IFavorites;
 }
 
 export interface IArticles {
@@ -21,6 +22,15 @@ export interface IArticles {
 }
 
 export interface IFavorites {
+  getAllFavorites: Favorites;
+}
+
+type Favorites = {
+  favorites: DataFovorite[];
+  totalItems: number;
+};
+
+type DataFovorite = {
   articleId: number;
   title: string;
   description: string;
@@ -28,4 +38,4 @@ export interface IFavorites {
   urls: string[];
   type: string;
   userId: string;
-}
+};

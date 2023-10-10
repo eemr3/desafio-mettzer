@@ -25,7 +25,6 @@ export default function NavBar() {
     return <div>Carregando...</div>;
   }
   const user = data?.user;
-  console.info(data);
 
   const logout = () => {
     removeCookie('access_token');

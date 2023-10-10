@@ -1,6 +1,6 @@
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql';
 
-import { IUser } from '../types/user';
+import { IUser, ReqUser } from '../types/user';
 import { FavoriteService } from '../services/favorite.service';
 import { Favorite, GetAllFavorites, InputFavorite } from '../types/favorite';
 
@@ -11,7 +11,7 @@ export class FavoriteResolver {
   }
   @Authorized()
   @Mutation(() => Favorite)
-  async createFavorite(@Arg('data') data: InputFavorite, @Ctx() ctx: IUser) {
+  async createFavorite(@Arg('data') data: InputFavorite, @Ctx() ctx: ReqUser) {
     const id = ctx.req?.user?.id;
     const favorite = await this.favoriteService.createFavoriteService({
       ...data,

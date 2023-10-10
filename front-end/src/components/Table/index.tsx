@@ -1,19 +1,15 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { IArticle, IFavorite } from '../../common/interfaces/articles';
 import { usePathname } from 'next/navigation';
-import ButtonFavorite from '../Buttons/ButtonFavorite';
 import { AppContext } from '../../context/AppContext';
+import ButtonFavorite from '../Buttons/ButtonFavorite';
 
 interface TableProps {
-  // articles: IArticle[];
-  // favorites: IFavorite[];
   isLoading: boolean;
 }
 function Table({ isLoading }: TableProps) {
-  const { articles, favorites } = useContext(AppContext);
+  const { articles, data } = useContext(AppContext);
   const pathname = usePathname();
-  console.log(articles);
 
   if (isLoading && pathname === '/home') {
     return (
@@ -106,7 +102,9 @@ function Table({ isLoading }: TableProps) {
                     <td className="flex justify-center text-center max-w-md  py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
                       <ButtonFavorite
                         favData={item.id}
-                        checked={favorites.some((t) => t.articleId === Number(item.id))}
+                        checked={data.getAllFavorites?.favorites.some(
+                          (t) => t.articleId === Number(item.id),
+                        )}
                       />
                     </td>
                   </tr>
