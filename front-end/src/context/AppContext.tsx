@@ -19,7 +19,7 @@ export function AppProvider({ children }: AppProviderProps) {
   const [articles, setArticles] = useState<IArticles[]>([]);
   const [favorites, setFavorites] = useState<IFavorites[]>([]);
   const [favorited, setFavorited] = useState(false);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('água');
   const [inputChange, setInputChange] = useState('');
 
   return (

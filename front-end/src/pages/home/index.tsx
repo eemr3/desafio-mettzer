@@ -1,22 +1,22 @@
 import { useContext, useEffect, useState } from 'react';
 import NavBar from '../../components/SearchBar';
 import Table from '../../components/Table';
-import { api } from '../../service/api';
 import { AppContext } from '../../context/AppContext';
+import { getAllArticles } from '../../service/http';
+import Pagination from '../../components/Pagination';
 
 function HomePage() {
-  const { setArticles } = useContext(AppContext);
+  const { setArticles, query } = useContext(AppContext);
   const [isLoading, setIsloading] = useState(true);
+  const [offset, setOffset] = useState(1);
 
   useEffect(() => {
     const getAllArticle = async () => {
       setIsloading(true);
-      const { data } = await api.get(
-        `/search/água?1&pageSize=10&apiKey=${process.env.NEXT_PUBLIC_APIKEY_CORE}`,
-      );
+      const { data } = await getAllArticles(query, offset);
 
       setArticles(
-        data?.data.map((item: any) => {
+        data.map((item: any) => {
           return {
             id: item._id,
             ...item._source,
@@ -27,12 +27,15 @@ function HomePage() {
       setIsloading(false);
     };
     getAllArticle();
-  }, [setArticles]);
+  }, [offset, query, setArticles]);
 
   return (
     <div>
       <NavBar />
-      <Table isLoading={isLoading} />
+      <div className="h-[65%]">
+        <Table isLoading={isLoading} />
+      </div>
+      <Pagination limit={10} total={100} offset={offset} setOffset={setOffset} />
     </div>
   );
 }
