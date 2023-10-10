@@ -16,11 +16,20 @@ export class UserService {
         password: newPwd,
       },
     });
-    console.log(user);
+
     return user;
   }
 
   async getAllUsers() {
     return await prisma.user.findMany();
+  }
+
+  async getUser(id: string) {
+    const user = await prisma.user.findUnique({ where: { id } });
+    if (!user) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    return user;
   }
 }

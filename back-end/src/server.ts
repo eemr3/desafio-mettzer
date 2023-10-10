@@ -14,6 +14,7 @@ async function bootstrap() {
     emitSchemaFile: join(process.cwd(), 'schema.gql'),
     validate: false,
     authChecker: async ({ context: { req } }) => {
+      console.log(req.headers.authorization);
       const token = req.headers.authorization;
 
       if (token) {
@@ -42,7 +43,11 @@ async function bootstrap() {
     schema,
     context: ({ req }: any) => ({ req }),
     cors: {
-      origin: ['http://localhost:3000', 'http://127.0.0.1:5173'],
+      origin: [
+        'http://localhost:3000',
+        'http://127.0.0.1:5173',
+        'https://studio.apollographql.com',
+      ],
     },
   });
 

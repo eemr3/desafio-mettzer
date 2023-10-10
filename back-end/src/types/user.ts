@@ -11,6 +11,9 @@ export class User {
 
   @Field()
   email: string;
+
+  @Field({ nullable: true })
+  avatarUrl?: string;
 }
 
 @ObjectType()
@@ -29,6 +32,9 @@ export class InputUser {
 
   @Field()
   password: string;
+
+  @Field({ nullable: true })
+  avatarUrl?: string;
 }
 
 @InputType()
@@ -44,6 +50,7 @@ type Payload = {
   id: string;
   fullName: string;
   email: string;
+  avatarUrl?: string;
   iat: number;
   exp: number;
 };
@@ -51,6 +58,14 @@ type Payload = {
 export interface RequestWithUser extends Request {
   user?: Payload;
 }
-export interface IUser {
+export interface ReqUser {
   req: RequestWithUser;
+}
+
+export interface IUser {
+  id: string;
+  fullName: string;
+  email: string;
+  password: string;
+  avatarUrl: string | null;
 }

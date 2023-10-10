@@ -1,4 +1,3 @@
-'use client';
 import FormLogin from '../../components/Forms/Login';
 
 function Login() {

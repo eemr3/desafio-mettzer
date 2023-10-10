@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid()) @map("_id")
-  fullName String @map("full_name")
-  email    String @unique
-  password String
-
-  Favorite Favorite[]
+  id        String     @id @default(uuid()) @map("_id")
+  fullName  String     @map("full_name")
+  email     String     @unique
+  password  String
+  avatarUrl String?    @map("avatar_url")
+  Favorite  Favorite[]
 
   @@map("users")
 }

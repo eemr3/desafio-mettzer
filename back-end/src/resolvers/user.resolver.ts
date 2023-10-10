@@ -1,5 +1,5 @@
-import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql';
-import { InputUser, User } from '../types/user';
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql';
+import { IUser, InputUser, ReqUser, User } from '../types/user';
 import { UserService } from '../services/user.service';
 
 @Resolver()
@@ -9,14 +9,15 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async createUser(@Arg('data') data: InputUser): Promise<User> {
+  async createUser(@Arg('data') data: InputUser): Promise<IUser> {
     const user = await this.userService.createUser(data);
     return user;
   }
 
   @Authorized()
-  @Query(() => [User])
-  async users(): Promise<User[]> {
-    return await this.userService.getAllUsers();
+  @Query(() => User)
+  async user(@Ctx() ctx: ReqUser): Promise<IUser> {
+    const id = ctx.req?.user?.id || '';
+    return await this.userService.getUser(id);
   }
 }

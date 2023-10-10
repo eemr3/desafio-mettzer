@@ -39,6 +39,7 @@ input InputLogin {
 }
 
 input InputUser {
+  avatarUrl: String
   email: String!
   fullName: String!
   password: String!
@@ -53,7 +54,7 @@ type Mutation {
 
 type Query {
   getAllFavorites(limit: Float!): GetAllFavorites!
-  users: [User!]!
+  user: User!
 }
 
 type TokenJwt {
@@ -61,6 +62,7 @@ type TokenJwt {
 }
 
 type User {
+  avatarUrl: String
   email: String!
   fullName: String!
   id: ID!
