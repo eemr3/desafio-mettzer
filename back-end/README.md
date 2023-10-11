@@ -1,7 +1,6 @@
 # Back-end da Api
 
-Back end responsável por gerência os end-points da api.
-
+Back end responsável por gerência os end-points da api. Foi refeito utilizando o GraphQL.
 
 ## Requisitos
 
@@ -10,18 +9,17 @@ Requisitos minimo para rodar o back-end da aplicação:
 - NodeJs v16 ou superior
 
 ## Tecnologias usadas
+
 - NodeJs
-- Express
-- Dotenv
+- GraphQL
+- ApolloServer
 - Jsonwbtoken
 - Bcryptjs
-- Mysql2
-- Sequelize
-- Nodemon
-
+- Prisma
 
 ## Funcionalidades
 
+- Craia conta de usuário
 - Realizer login
 - Gerar token de autenticação
 - Cadastrar favoritos

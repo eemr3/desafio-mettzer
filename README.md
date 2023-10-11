@@ -7,20 +7,8 @@ Aplicação que realiza requisição para a API [CORE API](https://core.ac.uk/do
 Requisitos minimo para rodar o back-end da aplicação:
 
 - NodeJs v16 ou superior
-- MySQL v8
+- MongoDB
 - Docoker (opcional)
-
-Observação: Se tiver o docker instalado e não tiver o mysql, basta cria um container com o mysql.
-
-Exemplro de um container myslq na versão 8
-
-Use esse comando no terminal
-```bash
-docker run -p 3306:3306 --name mysql_80 -e MYSQL_ROOT_PASSWORD=12345678 -d mysql:8 mysqld --default-authentication-plugin=mysql_native_password
-
-```
-Obs: Existe um arquivo .env.exemple com as configurações do banco de dados, se optar por usar o comando acima já vai funcionar, caso contrário deverá alterar os valores na variável de ambiente para os valores usados no banco que está instalado o qual deseja usar.
-
 
 ## Rodando localmente
 
@@ -41,18 +29,25 @@ Instale as dependências
 ```bash
   npm install
 ```
-### Entre na pasta `back-end`: 
+
+### Entre na pasta `back-end`:
 
 #### Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar seguir as intruções abaixo:
 
-- Dentro da pasta `back-end` renomei o arquivo `.env.exemple` para `.env`, ele contem os valores da configuração do banco de dados. Altere os valores se necessário!
+- Dentro da pasta `back-end` renomei o arquivo `.env.exemple` para `.env`, ele contem os valores da configuração do banco de dados e a secrete key. Altere os valores se necessário!
+  - Dentro do `.env` existem duas variaveis de ambiente uma para o banco de dados `DATABASE_URL` e a outra para o secrete do JWT `JWT_SECRETE`
 
-- Renomei o arquivo `secrete.key.exemple` para `secrete.key`, ele já contem a chave secreta para o JWT.
+Observação: Se tiver o docker e docker-compose instalado e não tiver o MogoDB, após o clone entre na pasta `back-end` e utilize o comando `npm run compose:up`, que será criado um containe Docker com o MongoDB.
 
+Use esse comando no termina
 
-Obs: Só estão indo esse arquivo com a key, as configurações do banco de dados e a chave secreta por motivo de desafio, em um projeto rael esses valores não sobem para o github.
+```bash
+npm run compose:up
+```
+
+Obs: Existe um arquivo .env.exemple com as configurações do banco de dados, se optar por usar o comando acima já vai funcionar, caso contrário deverá alterar os valores na variável de ambiente para os valores usados no banco que está instalado o qual deseja usar.
 
 #### Crie o banco de dados
 
@@ -60,21 +55,15 @@ Dentro da pasta back-end:
 
 ```bash
 npm run database
-``` 
-O banco de dados é criado com as tabelas `users`, `favorites`, `authors` e `urls`. A tabela `users` é populado com dados de um usuário.
-
-### Dados para realizar o login: 
-```bash
-email: ichigo@email.com
-senha: 123456
 ```
-Para rodar o back-end digite o comando: 
+
+Para rodar o back-end digite o comando:
 
 ```bash
 npm run dev
 ```
 
-## Entre no diretório do ``front-end``
+## Entre no diretório do `front-end`
 
 ```bash
   cd front-end
@@ -84,42 +73,16 @@ npm run dev
 
 Para rodar esse projeto, você vai precisar seguir as intruções abaixo:
 
-Dentro da pasta `font-end` renomei o arquivo `.env.development.exemple` para `.env.development`, ele já contem a key para o acesso a api CORE API.
+Dentro da pasta `font-end` renomei o arquivo `.env.local.exemple` para `.env.local`, ele já contem a key e a URL para o acesso a api CORE API.
 
 Para rodar o front-end digite o comando:
+
 ```bash
 npm start
 ```
+
 Obs: O back-end deve estar rodando para o front-end funcionar!
 
-## Rodando tests
+## Autor
 
-### Back-end
-Entre na pasta ``back-end`` e use o comando:
-```bash
-npm run test:coverage
-```
-### Front-end
-Entre na pasta ``front-end`` e use o comando:
-```bash
-npm test
-```
-
-## Informção do Front-end da aplicação
-
-- Diretório do Front-end
-
-```bash
-  cd front-end
-```
-
-- [Front-End](https://github.com/eemr3/desafio-mettzer/tree/main/front-end)
-
-## Informção do Back-end da aplicação
-
-- Diretório do Back-end
-
-```bash
-  cd back-end
-```
-- [Back-End](https://github.com/eemr3/desafio-mettzer/tree/main/back-end)
+- [@eemr3](https://www.github.com/eemr3)
