@@ -16,7 +16,7 @@ function HomePage() {
       const { data } = await getAllArticles(query, offset);
 
       setArticles(
-        data.map((item: any) => {
+        data?.map((item: any) => {
           return {
             articleId: item._id,
             ...item._source,
