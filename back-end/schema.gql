@@ -49,11 +49,11 @@ type Mutation {
   createFavorite(data: InputFavorite!): Favorite!
   createUser(data: InputUser!): User!
   login(data: InputLogin!): TokenJwt!
-  removeFavorite(id: Float!): Favorite!
+  removeFavorite(id: Int!): Favorite!
 }
 
 type Query {
-  getAllFavorites(limit: Float!): GetAllFavorites!
+  getAllFavorites(limit: Int!): GetAllFavorites!
   user: User!
 }
 

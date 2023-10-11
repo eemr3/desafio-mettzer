@@ -1,8 +1,8 @@
 export interface IAppContext {
   articles: IArticles[];
   setArticles: (value: IArticles[]) => void;
-  favorites: IFavorites[];
-  setFavorites: (value: IFavorites[]) => void;
+  favorites: DataFovorite[];
+  setFavorites: (value: DataFovorite[]) => void;
   favorited: boolean;
   setFavorited: (value: boolean) => void;
   query: string;
@@ -10,10 +10,12 @@ export interface IAppContext {
   inputChange: string;
   setInputChange: (value: string) => void;
   data: IFavorites;
+  limit: number;
+  setLimit: (value: number) => void;
 }
 
 export interface IArticles {
-  id: number;
+  articleId: number;
   title: string;
   description: string;
   authors: string[];
@@ -30,7 +32,7 @@ type Favorites = {
   totalItems: number;
 };
 
-type DataFovorite = {
+export interface DataFovorite {
   articleId: number;
   title: string;
   description: string;
@@ -38,4 +40,4 @@ type DataFovorite = {
   urls: string[];
   type: string;
   userId: string;
-};
+}

@@ -8,10 +8,11 @@ import { removeCookie } from '../../common/cookies';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../lib/query';
+import Link from 'next/link';
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Meus favoritos', href: '#', current: false },
+  { name: 'Home', href: '/home', current: true },
+  { name: 'Meus favoritos', href: '/favorites', current: false },
 ];
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
@@ -56,14 +57,14 @@ export default function NavBar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         className="text-gray-100 hover:bg-blue-500 hover:text-white
                           rounded-md px-3 py-2 text-sm font-medium"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -95,13 +96,13 @@ export default function NavBar() {
                      bg-blue-500 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     >
                       <Menu.Item>
-                        <a
-                          href="#"
+                        <Link
+                          href="/favorites"
                           className="bg-blue-500 flex items-center gap-x-2 px-4 py-2 text-sm text-white"
                         >
                           <HeartIcon width={30} />
                           Favoritos
-                        </a>
+                        </Link>
                       </Menu.Item>
 
                       <Menu.Item>

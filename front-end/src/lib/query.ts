@@ -12,7 +12,7 @@ export const GET_USER = gql`
 `;
 
 export const GET_FAVORITES = gql`
-  query GetAllFavorites($limit: Float!) {
+  query GetAllFavorites($limit: Int!) {
     getAllFavorites(limit: $limit) {
       favorites {
         articleId

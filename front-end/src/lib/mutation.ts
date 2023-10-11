@@ -28,7 +28,7 @@ export const CREATE_FAVORITE = gql`
 `;
 
 export const REMOVE_FAVORITE = gql`
-  mutation RemoveFavorite($id: String!) {
+  mutation RemoveFavorite($id: Int!) {
     removeFavorite(id: $id) {
       id
       title

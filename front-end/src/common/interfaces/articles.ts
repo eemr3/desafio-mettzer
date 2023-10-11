@@ -1,5 +1,5 @@
 export interface IArticle {
-  id: number;
+  articleId: number;
   title: string;
   description: string;
   type: string;
