@@ -10,7 +10,7 @@ import { setCookie } from '../../../common/cookies';
 import { SIGNIN } from '../../../lib/mutation';
 import { FormLoginSchema } from '../../../schema/form-login.schema';
 import { Input } from '../../CustomInput';
-import { Form } from '../../template/LayoutForm.';
+import { Form } from '../../template/LayoutForm';
 import { GET_USER } from '../../../lib/query';
 
 export default function FormLogin() {
