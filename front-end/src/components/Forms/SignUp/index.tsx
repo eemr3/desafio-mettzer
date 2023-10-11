@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from '../../template/LayoutForm.';
+import { Form } from '../../template/LayoutForm';
 import { useFormik } from 'formik';
 import { FormSignUpSchema } from '../../../schema/form-signup.schema';
 import { Input } from '../../CustomInput';
