@@ -9,7 +9,7 @@
     "dev": "tsnd --respawn --transpile-only src/server.ts",
     "compose:up": "docker-compose up -d",
     "compose:down": "docker-compose down",
-    "database": "npx prisma db:push"
+    "database": "npx prisma db push"
   },
   "keywords": [],
   "author": "",
